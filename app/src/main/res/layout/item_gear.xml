@@ -1,16 +1,10 @@
 <!-- res/layout/item_gear.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gearText"
     android:layout_width="60dp"
-    android:layout_height="100dp"
+    android:layout_height="60dp"
     android:gravity="center"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/gearText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="P"
-        android:textSize="28sp"
-        android:textColor="#80FFFFFF"
-    android:textStyle="normal" />
-</LinearLayout>
+    android:textSize="24sp"
+    android:textColor="#55FFFFFF"
+    android:fontFamily="@font/roboto"
+    android:layout_margin="8dp"/>

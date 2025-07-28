@@ -34,5 +34,7 @@ public class MainActivity extends AppCompatActivity {
         GearAdapter adapter = new GearAdapter();
         gearRecycler.setAdapter(adapter);
 
+        adapter.setSelectedPosition(1);
+
     }
 }

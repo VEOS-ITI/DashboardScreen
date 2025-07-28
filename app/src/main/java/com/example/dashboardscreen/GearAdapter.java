@@ -8,51 +8,53 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class GearAdapter extends RecyclerView.Adapter<GearAdapter.ViewHolder> {
-    private String[] gears = {"P", "R", "N", "D"};
-    private int selectedIndex = 3; // "D" as default
+public class GearAdapter extends RecyclerView.Adapter<GearAdapter.GearViewHolder> {
+    private final String[] gears = {"P", "R", "N", "D"};
+    private int selectedPosition = 1; // default to "D"
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView gearText;
+    public void setSelectedPosition(int position) {
+        selectedPosition = position;
+        notifyDataSetChanged();
+    }
 
-        public ViewHolder(View view) {
-            super(view);
-            gearText = view.findViewById(R.id.gearText);
-        }
+    @NonNull
+    @Override
+    public GearViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gear, parent, false);
+        return new GearViewHolder(view);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_gear, parent, false);
-        return new ViewHolder(view);
-    }
+    public void onBindViewHolder(@NonNull GearViewHolder holder, int position) {
+        holder.text.setText(gears[position]);
 
-    @Override
-    public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        String gear = gears[position];
-        holder.gearText.setText(gear);
-
-        if (position == selectedIndex) {
-            holder.gearText.setTextColor(Color.WHITE);
-            holder.gearText.setTextSize(36);
-            holder.gearText.setTypeface(null, Typeface.BOLD);
+        if (position == selectedPosition) {
+            holder.text.setTextSize(32);
+            holder.text.setTextColor(Color.WHITE);
+            holder.text.setAlpha(1.0f);
+            holder.text.setShadowLayer(8, 0, 0, Color.WHITE); // glow
         } else {
-            holder.gearText.setTextColor(Color.parseColor("#80FFFFFF"));
-            holder.gearText.setTextSize(28);
-            holder.gearText.setTypeface(null, Typeface.NORMAL);
+            holder.text.setTextSize(24);
+            holder.text.setTextColor(Color.parseColor("#55FFFFFF"));
+            holder.text.setAlpha(0.5f);
+            holder.text.setShadowLayer(0, 0, 0, Color.TRANSPARENT);
         }
-
-        holder.itemView.setOnClickListener(v -> {
-            selectedIndex = position;
-            notifyDataSetChanged();
-        });
     }
 
     @Override
     public int getItemCount() {
         return gears.length;
+    }
+
+    static class GearViewHolder extends RecyclerView.ViewHolder {
+        TextView text;
+
+        public GearViewHolder(@NonNull View itemView) {
+            super(itemView);
+            text = itemView.findViewById(R.id.gearText);
+        }
     }
 }

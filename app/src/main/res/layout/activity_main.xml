@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.457" />
+        app:layout_constraintVertical_bias="0.465" />
 
     <TextView
         android:id="@+id/textView2"
@@ -224,6 +224,7 @@
         android:id="@+id/mapView"
         android:layout_width="239dp"
         android:layout_height="241dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.675"
@@ -233,8 +234,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gearRecycler"
-        android:layout_width="311dp"
-        android:layout_height="133dp"
+        android:layout_width="271dp"
+        android:layout_height="137dp"
         android:orientation="horizontal"
 
         app:layout_constraintBottom_toTopOf="@+id/battery_img"
@@ -243,4 +244,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seat_belt_img"
         app:layout_constraintVertical_bias="0.501" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="396dp"
+        android:layout_height="221dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:srcCompat="@drawable/car" />
 </androidx.constraintlayout.widget.ConstraintLayout>
