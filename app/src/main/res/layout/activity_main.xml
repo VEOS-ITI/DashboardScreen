@@ -245,14 +245,59 @@
         app:layout_constraintTop_toBottomOf="@+id/seat_belt_img"
         app:layout_constraintVertical_bias="0.501" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="396dp"
-        android:layout_height="221dp"
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="396dp"-->
+<!--        android:layout_height="221dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="1.0"-->
+<!--        tools:srcCompat="@drawable/car" />-->
+
+    <FrameLayout
+        android:id="@+id/root"
+        android:layout_width="438dp"
+        android:layout_height="203dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:srcCompat="@drawable/car" />
+        app:layout_constraintVertical_bias="1.0">
+
+        <!-- Animated Road -->
+
+        <!-- First road image -->
+        <ImageView
+            android:id="@+id/road1"
+            android:layout_width="426dp"
+            android:layout_height="176dp"
+            android:layout_gravity="top|center_horizontal"
+            android:scaleType="centerCrop"
+            android:src="@drawable/road_loop1" />
+
+        <!-- Second road image placed below the first -->
+        <ImageView
+            android:id="@+id/road2"
+            android:layout_width="426dp"
+            android:layout_height="176dp"
+            android:layout_gravity="top|center_horizontal"
+            android:translationY="176dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/road_loop1" />
+
+        <ImageView
+            android:id="@+id/carView"
+            android:layout_width="622dp"
+            android:layout_height="246dp"
+            android:layout_gravity="center"
+            android:elevation="10dp"
+            android:src="@drawable/car" />
+
+    </FrameLayout>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
