@@ -6,12 +6,14 @@ import android.animation.ValueAnimator;
 import android.hardware.lights.Light;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -19,7 +21,29 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+//import android.car.Car
+//import android.car.hardware.CarPropertyValue
+//import android.car.hardware.property.CarPropertyManager
+
 public class MainActivity extends AppCompatActivity {
+
+    int VENDOR_EXTENSION_SPEED_PROPERTY = 0x21400104;
+
+    int VENDOR_EXTENSION_GEAR_PROPERTY = 0x21400105;
+
+    int VENDOR_EXTENSION_BATTERYLEVEL_PROPERTY = 0x21400106;
+
+    int VENDOR_EXTENSION_RIGHTLIGHTING_PROPERTY = 0x21400107;
+
+    int VENDOR_EXTENSION_LEFTLIGHTING_PROPERTY = 0x21400108;
+    int VENDOR_EXTENSION_LIGHTING_PROPERTY = 0x21400108;
+    int VENDOR_EXTENSION_TEMP_PROPERTY = 0x21400109;
+    int VENDOR_EXTENSION_TIRE_PROPERTY  = 0x21400110;
+    int VENDOR_EXTENSION_SEATBELT_PROPERTY  = 0x21400110;
+
+    int VENDOR_EXTENSION_DISTANCE_PROPERTY= 0x21400110;
+
+
 
     int vhallighting_status=1,vhalright_light_status=0,vhalleft_light_status =1,vhalbatterylevel=15;
     RecyclerView gearRecycler;
@@ -28,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView road1, road2 , lightingON ,lightingOFF ,lightingERROR , rightLightON, leftLightON, rightLightOFF, leftLightOFF,batterycharge, batterylevel;
     float roadHeight = 600f; // match height in dp
+
+//    CarPropertyManager carPropertyManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+//        car = Car.createCar(this.applicationContext);
+//        carPropertyManager = car.getCarManager(Car.PROPERTY_SERVICE) as CarPropertyManager;
+
         lightingON=findViewById(R.id.light_on_img);
         lightingOFF=findViewById(R.id.light_off_img);
         lightingERROR=findViewById(R.id.light_error_img);
@@ -63,6 +92,21 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.setSelectedPosition(1);
 
+//        carPropertyManager.registerCallback(new CarPropertyManager.CarPropertyEventCallback() {
+//            @Override
+//            public void onChangeEvent(@Nullable CarPropertyValue<?> value) {
+//                if (value != null && value.getValue() instanceof Integer) {
+//                    int intValue = (Integer) value.getValue();
+//                    updateSpeedometer(1, (float) intValue);
+//                }
+//            }
+//
+//            @Override
+//            public void onErrorEvent(int propertyId, int zone) {
+//                Log.i("Prop Error", propertyId + " , " + zone);
+//            }
+//        }, VENDOR_EXTENSION_SPEED_PROPERTY, CarPropertyManager.SENSOR_RATE_FASTEST);
+        
         handleLighting();
         handleRightLight();
         handleLeftLight();

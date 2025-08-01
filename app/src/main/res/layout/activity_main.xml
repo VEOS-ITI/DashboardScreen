@@ -285,12 +285,12 @@
         android:layout_marginTop="140dp"
 
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/battery_img"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintHorizontal_bias="0.185"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seat_belt_img"
-        app:layout_constraintVertical_bias="0.501" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/carView"
