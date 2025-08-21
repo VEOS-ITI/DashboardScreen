@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/background11"
+    android:background="@drawable/background2"
     android:scrollbarAlwaysDrawHorizontalTrack="true">
 
     <TextView
@@ -64,10 +64,10 @@
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.914"
+        app:layout_constraintHorizontal_bias="0.763"
         app:layout_constraintStart_toEndOf="@+id/charge_img"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.945" />
+        app:layout_constraintVertical_bias="0.967" />
 
     <ImageView
         android:id="@+id/charge_img"
@@ -292,19 +292,32 @@
         app:layout_constraintTop_toBottomOf="@+id/seat_belt_img"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/carView"
+    <VideoView
+        android:id="@+id/videoView"
         android:layout_width="501dp"
         android:layout_height="186dp"
         android:elevation="10dp"
-        android:src="@drawable/car"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"/>
+
+<!--    <ImageView-->
+<!--        android:id="@+id/carView"-->
+<!--        android:layout_width="501dp"-->
+<!--        android:layout_height="186dp"-->
+<!--        android:elevation="10dp"-->
+<!--        android:src="@drawable/car"-->
+<!--        android:visibility="visible"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.529"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="1.0" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

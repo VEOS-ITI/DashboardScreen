@@ -4,13 +4,16 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.hardware.lights.Light;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -21,52 +24,24 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-//import android.car.Car
-//import android.car.hardware.CarPropertyValue
-//import android.car.hardware.property.CarPropertyManager
 
 public class MainActivity extends AppCompatActivity {
-
-    int VENDOR_EXTENSION_SPEED_PROPERTY = 0x21400104;
-
-    int VENDOR_EXTENSION_GEAR_PROPERTY = 0x21400105;
-
-    int VENDOR_EXTENSION_BATTERYLEVEL_PROPERTY = 0x21400106;
-
-    int VENDOR_EXTENSION_RIGHTLIGHTING_PROPERTY = 0x21400107;
-
-    int VENDOR_EXTENSION_LEFTLIGHTING_PROPERTY = 0x21400108;
-    int VENDOR_EXTENSION_LIGHTING_PROPERTY = 0x21400108;
-    int VENDOR_EXTENSION_TEMP_PROPERTY = 0x21400109;
-    int VENDOR_EXTENSION_TIRE_PROPERTY  = 0x21400110;
-    int VENDOR_EXTENSION_SEATBELT_PROPERTY  = 0x21400110;
-
-    int VENDOR_EXTENSION_DISTANCE_PROPERTY= 0x21400110;
-
-
-
     int vhallighting_status=1,vhalright_light_status=0,vhalleft_light_status =1,vhalbatterylevel=15;
     RecyclerView gearRecycler;
 
     TextView charge_txt;
 
+    VideoView videoView;
     ImageView road1, road2 , lightingON ,lightingOFF ,lightingERROR , rightLightON, leftLightON, rightLightOFF, leftLightOFF,batterycharge, batterylevel;
     float roadHeight = 600f; // match height in dp
-
-//    CarPropertyManager carPropertyManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-//        car = Car.createCar(this.applicationContext);
-//        carPropertyManager = car.getCarManager(Car.PROPERTY_SERVICE) as CarPropertyManager;
+
+         videoView = findViewById(R.id.videoView);
 
         lightingON=findViewById(R.id.light_on_img);
         lightingOFF=findViewById(R.id.light_off_img);
@@ -82,6 +57,19 @@ public class MainActivity extends AppCompatActivity {
 
         gearRecycler = findViewById(R.id.gearRecycler);
 
+
+        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.road_moving4;
+        Uri uri = Uri.parse(videoPath);
+
+        videoView.setVideoURI(uri);
+
+        // Add play/pause controls
+        MediaController mediaController = new MediaController(this);
+        videoView.setMediaController(mediaController);
+        mediaController.setAnchorView(videoView);
+
+        videoView.start(); // start playing automatically
+
         // Use horizontal layout for gear shift
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         gearRecycler.setLayoutManager(layoutManager);
@@ -91,22 +79,6 @@ public class MainActivity extends AppCompatActivity {
         gearRecycler.setAdapter(adapter);
 
         adapter.setSelectedPosition(1);
-
-//        carPropertyManager.registerCallback(new CarPropertyManager.CarPropertyEventCallback() {
-//            @Override
-//            public void onChangeEvent(@Nullable CarPropertyValue<?> value) {
-//                if (value != null && value.getValue() instanceof Integer) {
-//                    int intValue = (Integer) value.getValue();
-//                    updateSpeedometer(1, (float) intValue);
-//                }
-//            }
-//
-//            @Override
-//            public void onErrorEvent(int propertyId, int zone) {
-//                Log.i("Prop Error", propertyId + " , " + zone);
-//            }
-//        }, VENDOR_EXTENSION_SPEED_PROPERTY, CarPropertyManager.SENSOR_RATE_FASTEST);
-        
         handleLighting();
         handleRightLight();
         handleLeftLight();
